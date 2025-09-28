@@ -1,0 +1,7 @@
+background = #181818
+font-family = "Comic Mono"
+font-size = 18
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+maximize = true
