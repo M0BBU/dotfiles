@@ -1,5 +1,6 @@
 cask "ghostty"
 cask "hammerspoon"
+cask "bitwarden"
 
 # My favorite font.
 cask "font-comic-mono"
