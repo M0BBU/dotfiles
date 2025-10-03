@@ -1,6 +1,7 @@
 cask "ghostty"
 cask "hammerspoon"
 cask "bitwarden"
+cask "jimeh/emacs-builds/emacs-app"
 
 # My favorite font.
 cask "font-comic-mono"

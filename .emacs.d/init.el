@@ -95,7 +95,7 @@
    auto-save-default nil
    create-lockfiles nil)
 
-;;   ;; Custom theme.
+  ;; Custom theme.
   (setq modus-themes-common-palette-overrides
         '((border-mode-line-active unspecified)
           (border-mode-line-inactive unspecified)))
