@@ -17,7 +17,7 @@ alias bupdate="brew update &&\
 alias ll='ls -alF --color=auto'
 alias arcd='arc diff --noautoland --amend-all --apply-patches --allow-untracked HEAD^'
 alias arcl='arc lint --apply-patches'
-alias update='git commit --amend --no-edit all && arcd -m "Update"'
+alias update='git add -A && git commit --amend --no-edit && arcd -m "Update"'
 
 alias ga='git all -A'
 alias gcm='git commit -m'
