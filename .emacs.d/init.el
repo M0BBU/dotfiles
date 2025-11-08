@@ -34,6 +34,8 @@
   (global-display-line-numbers-mode)
   ;; Ensure files are always updated after git
   (global-auto-revert-mode t)
+  ;; Ensure files are always updated after git in remote!
+  (setq auto-revert-remote-files nil)
 
   ;; Get rid of top ui for more screen space.
   (tooltip-mode -1)
