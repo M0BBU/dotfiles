@@ -9,6 +9,20 @@ zstyle ':vcs_info:git:*' formats '%b '
 setopt PROMPT_SUBST
 PROMPT='%F{green}danielchoo %F{cyan}%~%f %F{red}${vcs_info_msg_0_}%f$ '
 
+if ! exists "gs" ; then
+    mkdir -p "$HOME/.bin"
+    cd "$HOME/.gitspice"
+    go build -o "$HOME/.bin"
+fi
+
+case ":${PATH}:" in
+    *:"$HOME/.bin":*)
+        ;;
+    *)
+        export PATH="$HOME/.bin:$PATH"
+        ;;
+esac
+
 alias config='/usr/bin/git --git-dir=$HOME/.mycfg/ --work-tree=$HOME'
 alias bupdate="brew update &&\
     brew bundle install --file=~/.config/Brewfile &&\
@@ -44,4 +58,8 @@ function rebase_branch() {
     git pull
     gsw "$branch"
     git rebase main
+}
+
+function exists () {
+  type "$1" >/dev/null 2>/dev/null
 }
