@@ -9,7 +9,7 @@ zstyle ':vcs_info:git:*' formats '%b '
 setopt PROMPT_SUBST
 PROMPT='%F{green}danielchoo %F{cyan}%~%f %F{red}${vcs_info_msg_0_}%f$ '
 
-if [ !type "gs" >/dev/null 2>/dev/null ]; then
+if ! type "gs" >/dev/null 2>/dev/null; then
     mkdir -p "$HOME/.bin"
     cd "$HOME/.gitspice"
     go build -o "$HOME/.bin"
