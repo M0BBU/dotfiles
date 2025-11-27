@@ -302,6 +302,13 @@
   (add-to-list 'major-mode-remap-alist
                '(c-or-c++-mode . c-or-c++-ts-mode)))
 
+(use-package nix-mode
+  :ensure
+  :mode "\\.nix\\')")
+
+(use-package haskell-mode
+  :ensure)
+
 (use-package tramp
   :config
   (setq remote-file-name-inhibit-locks t
