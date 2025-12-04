@@ -9,12 +9,6 @@ zstyle ':vcs_info:git:*' formats '%b '
 setopt PROMPT_SUBST
 PROMPT='%F{green}danielchoo %F{cyan}%~%f %F{red}${vcs_info_msg_0_}%f$ '
 
-if ! type "gs" >/dev/null 2>/dev/null; then
-    mkdir -p "$HOME/.bin"
-    cd "$HOME/.gitspice"
-    go build -o "$HOME/.bin"
-fi
-
 case ":${PATH}:" in
     *:"$HOME/.bin":*)
         ;;
@@ -22,6 +16,12 @@ case ":${PATH}:" in
         export PATH="$HOME/.bin:$PATH"
         ;;
 esac
+
+if ! type "gs" >/dev/null 2>/dev/null; then
+    mkdir -p "$HOME/.bin"
+    cd "$HOME/.gitspice"
+    go build -o "$HOME/.bin"
+fi
 
 alias config='/usr/bin/git --git-dir=$HOME/.mycfg/ --work-tree=$HOME'
 alias bupdate="brew update &&\
@@ -31,7 +31,7 @@ alias bupdate="brew update &&\
 alias ll='ls -alF --color=auto'
 alias arcd='arc diff --noautoland --amend-all --apply-patches --allow-untracked HEAD^'
 alias arcl='arc lint --apply-patches'
-alias update='git add -A && git commit --amend --no-edit && arcd -m "Update"'
+alias update='gca && arhp --no-interactive'
 
 alias ga='git all -A'
 alias gcm='git commit -m'
@@ -40,6 +40,21 @@ alias grc='git rebase --continue'
 alias gsw='git switch'
 alias gst='git status'
 alias gbup=rebase_branch
+
+alias arhp='arh publish --apply-fixes'
+alias gbc=git_branch_create
+alias gcc='gs cc -a -m'
+alias gca='gs ca -a --no-edit'
+function git_branch_create() {
+    if [ $# -eq 0 ]; then
+        echo "No arguments provided. Exiting."
+        return 1
+    fi
+
+    parent="$(git rev-parse --abbrev-ref HEAD)"
+    gs bc $1 --no-commit
+    git branch --set-upstream-to=$parent
+}
 
 alias gstash='git add -A && git commit -m "TEMPORARY STASH. DO NOT COMMIT."'
 alias gpop='check_git_pop'
@@ -61,5 +76,5 @@ function rebase_branch() {
 }
 
 function exists() {
-  
+
 }
