@@ -45,6 +45,7 @@ alias arhp='arh publish --apply-fixes'
 alias gbc=git_branch_create
 alias gcc='gs cc -a -m'
 alias gca='gs ca -a --no-edit'
+alias resync='gs rs && gs rr'
 function git_branch_create() {
     if [ $# -eq 0 ]; then
         echo "No arguments provided. Exiting."
