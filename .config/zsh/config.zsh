@@ -1,5 +1,7 @@
 eval "$(direnv hook zsh)"
 
+export EDITOR="vim"
+
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source <(fzf --zsh)
 
