@@ -309,6 +309,9 @@
 (use-package haskell-mode
   :ensure)
 
+(use-package rust-mode
+  :ensure)
+
 (use-package tramp
   :config
   (setq remote-file-name-inhibit-locks t
