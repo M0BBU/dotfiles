@@ -1,6 +1,7 @@
 eval "$(direnv hook zsh)"
 
 export EDITOR="vim"
+bindkey -M viins 'jk' vi-cmd-mode
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source <(fzf --zsh)
@@ -55,7 +56,7 @@ function git_branch_create() {
     fi
 
     parent="$(git rev-parse --abbrev-ref HEAD)"
-    gs bc $1 --no-commit
+    gs bc $(whoami)/$1 --no-commit
     git branch --set-upstream-to=$parent
 }
 
