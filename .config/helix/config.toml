@@ -1,0 +1,7 @@
+[editor]
+true-color = true
+
+[keys.normal]
+# jk to escape
+"jk" = "escape"
+
