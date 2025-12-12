@@ -1,7 +1,5 @@
 [editor]
 true-color = true
 
-[keys.normal]
-# jk to escape
-"jk" = "escape"
-
+[keys.insert]
+j = { k = "normal_mode" } # Maps `jk` to exit insert mode
