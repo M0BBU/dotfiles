@@ -1,3 +1,6 @@
+
+theme = "ao"
+
 [editor]
 true-color = true
 
