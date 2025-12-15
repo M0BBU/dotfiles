@@ -3,6 +3,7 @@ theme = "autumn_night"
 
 [editor]
 true-color = true
+rulers = [80]
 
 [keys.insert]
 j = { k = "normal_mode" } # Maps `jk` to exit insert mode
