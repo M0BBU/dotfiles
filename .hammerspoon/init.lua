@@ -19,7 +19,6 @@ local apps =
 	["2"] = hs.settings.get("2"),
 	["3"] = hs.settings.get("3"),
 	["4"] = hs.settings.get("4"),
-    ["5"] = hs.settings.get("5"),
 }
 for key, app in pairs(apps) do
 	hs.hotkey.bind({"cmd", "ctrl"}, key, function()
