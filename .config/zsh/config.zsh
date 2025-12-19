@@ -48,6 +48,7 @@ alias gbup=rebase_branch
 
 alias arhp='arh publish --apply-fixes'
 alias gcc=create_commit
+alias gcf='gs cc -a -m'
 alias gca='gs ca -a --no-edit'
 alias resync='gs rs && gs rr'
 
