@@ -20,7 +20,19 @@ esac
 if ! type "gs" >/dev/null 2>/dev/null; then
     mkdir -p "$HOME/.bin"
     cd "$HOME/.gitspice"
-    go build -o "$HOME/.bin"
+
+    # For the environments with nix, we need to install go with nix-shell first.
+    if type "nix" >/dev/null 2>/dev/null; then
+        cd "$HOME/.gitspice"
+        nix shell nixpkgs#go
+        go build -o "$HOME/.bin"
+        exit
+        cd "$HOME"
+    else
+        # Assume go is installed in environments otherwise.
+        go build -o "$HOME/.bin"
+        cd "$HOME"
+    fi
 fi
 
 # fun git config
