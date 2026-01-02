@@ -95,6 +95,6 @@ function rebase_branch() {
     git rebase main
 }
 
-function exists() {
-
+function rtmux() {
+    autossh -M 0 $1 -t "if tmux -qu has; then tmux -qu attach; else EDITOR=hx tmux -qu new; fi"
 }
