@@ -96,5 +96,9 @@ function rebase_branch() {
 }
 
 function rtmux() {
-    autossh -M 0 $1 -t "if tmux -qu has; then tmux -qu attach; else EDITOR=hx tmux -qu new; fi"
+    ssh -t $1 "if tmux -qu has; then tmux -qu attach; else EDITOR=hx tmux -qu new; fi"
+}
+
+function clipcopy() {
+    printf '\033]52;c;%s\a' "$(cat | base64 | tr -d '\n')"
 }

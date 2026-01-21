@@ -5,3 +5,7 @@ cursor-style = block
 cursor-style-blink = false
 shell-integration-features = no-cursor
 maximize = true
+
+clipboard-read = allow
+clipboard-write = allow
+copy-on-select = clipboard
