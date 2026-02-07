@@ -1,6 +1,6 @@
 hs.settings.set("1", "Firefox")
 hs.settings.set("2", "Emacs")
-hs.settings.set("3", "Ghostty")
+hs.settings.set("3", "kitty")
 hs.settings.set("4", "Bitwarden")
 
 -- Check if a settings.lua file exists and if not, skip. This lets me apply any
