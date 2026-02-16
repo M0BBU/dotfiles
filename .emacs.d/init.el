@@ -97,6 +97,9 @@
    auto-save-default nil
    create-lockfiles nil)
 
+  ;; 80 character lines!
+  (setq-default fill-column 80)
+
   ;; Custom theme.
   (setq modus-themes-common-palette-overrides
         '((border-mode-line-active unspecified)
@@ -312,6 +315,24 @@
 (use-package rust-mode
   :ensure)
 
+(use-package htmlize
+  :ensure)
+
+(use-package ledger-mode
+  :ensure
+  :init
+  (add-to-list 'auto-mode-alist '("\\.\\(h?ledger\\|journal\\|j\\)$" . ledger-mode))
+  ;; (setq ledger-binary-path "path-to-fix-hledger-script.see-below")
+  (setq ledger-mode-should-check-version nil)
+  (setq ledger-report-links-in-register nil)
+  (setq ledger-report-auto-width nil)
+  (setq ledger-report-native-highlighting-arguments '("--color=always"))
+  (setq ledger-highlight-xact-under-point nil)
+  (setq ledger-default-date-format ledger-iso-date-format))
+
+(use-package csv-mode
+    :ensure)
+
 (use-package tramp
   :config
   (setq remote-file-name-inhibit-locks t
@@ -336,6 +357,46 @@
 (add-to-list 'auto-mode-alist (cons "\\.bazel\\'" 'bazel-mode))
 (add-hook 'go-ts-mode (lambda () (electric-indent-local-mode -1)))
 (setq go-ts-mode-indent-offset 4)
+
+;; For my org mode blogging :]
+(add-hook 'org-mode-hook #'auto-fill-mode)
+(setq org-capture-templates
+      '(("b" "Blog Post" plain
+         (file (lambda ()
+                 (let ((name (read-string "Post title: ")))
+                   (setq post-title name)
+                   (expand-file-name (format "%s-%s.org"
+                                            (format-time-string "%Y-%m-%d")
+                                            (replace-regexp-in-string " " "-" (downcase name)))
+                                     "~/code/cleinad.com/posts/"))))
+         "#+TITLE: %((lambda() post-title))\n#+DATE: %t\n#+FILETAGS: :%^{Tags}:\n\n%?"
+         :jump-to-captured t)))
+
+(defun cleinad/publish-local()
+  (interactive)
+  (load-file "~/code/cleinad.com/blog.el")
+  (org-publish "cleinad.com" t))
+
+(defun cleinad/publish-site()
+  (interactive)
+  (load-file "~/code/cleinad.com/blog.el")
+
+  (let* ((local-path "~/code/cleinad.com/html")
+        (server (getenv "SERVER"))
+        (port (getenv "PORT"))
+        (scp-cmd (format "scp -P %s -r %s %s:/var/www/cleinad.com/" port local-path server)))
+
+    (if (file-directory-p local-path)
+      (message "Deleting html directory...")
+      (delete-directory local-path t))
+
+    (org-publish "cleinad.com" t)
+
+    (message "Syncing to server...")
+
+    (if (= 0 (shell-command scp-cmd))
+        (message "Update successful!")
+      (error "Failed to sync!"))))
 
 ;; Need to tell emacs where to get the grammars
 (setq treesit-language-source-alist

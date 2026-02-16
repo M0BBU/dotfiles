@@ -15,7 +15,7 @@ buildEnv {
     fzf
     helix
     google-cloud-sdk
-    beancount
+    hledger
 
     # this will create a script that will rebuild and upgrade your setup. Is using shell script syntax
     (writeScriptBin "nix-rebuild" ''
