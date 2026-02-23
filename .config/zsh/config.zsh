@@ -62,6 +62,7 @@ alias arhp='arh publish --apply-fixes'
 alias gcc=create_commit
 alias gcf='gs cc -a -m'
 alias gca='gs ca -a --no-edit'
+alias gbd=clean_git_branches
 alias resync='gs rs && gs rr'
 
 alias gstash='git add -A && git commit -m "TEMPORARY STASH. DO NOT COMMIT."'
@@ -93,6 +94,10 @@ function rebase_branch() {
     git pull
     gsw "$branch"
     git rebase main
+}
+
+function clean_git_branches() {
+    git branch --merged | grep -vE "(^\\*|main|master)" | xargs git branch -d
 }
 
 function rtmux() {
