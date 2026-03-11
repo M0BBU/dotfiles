@@ -49,6 +49,7 @@ alias ll='ls -alF --color=auto'
 alias arcd='arc diff --noautoland --amend-all --apply-patches --allow-untracked HEAD^'
 alias arcl='arc lint --apply-patches'
 alias update='gca && arhp --no-interactive'
+alias rebase='gsw main && git pull && gs rr'
 
 alias gaa='git all -A'
 alias gcm='git commit -m'
