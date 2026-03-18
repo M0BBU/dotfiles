@@ -11,3 +11,6 @@ j = { k = "normal_mode" } # Maps `jk` to exit insert mode
 [keys.normal]
 "^" = "goto_first_nonwhitespace"
 "$" = "goto_line_end"
+
+[keys.normal.space]
+l = ":reflow"
