@@ -64,6 +64,7 @@ alias gca='gs ca -a --no-edit'
 
 alias gbd=clean_git_branches
 alias gbc='gsw $(git branch --sort=-committerdate --format="%(refname:short) - %(contents:subject)" | fzf --height 40% --reverse | awk "{print \$1}")'
+alias gbl='gs ll -a'
 
 alias resync='gs rs && gs rr'
 alias gstash='git add -A && git commit -m "TEMPORARY STASH. DO NOT COMMIT."'
