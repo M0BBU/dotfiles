@@ -52,23 +52,24 @@ alias update='gca && arhp --no-interactive'
 alias rebase='gsw main && git pull && gs rr'
 
 alias gaa='git all -A'
-alias gcm='git commit -m'
 alias grm='git rebase -i main'
 alias grc='git rebase --continue'
 alias gsw='git switch'
 alias gst='git status'
-alias gbup=rebase_branch
-alias gcb='gsw $(git branch --sort=-committerdate --format="%(refname:short) - %(contents:subject)" | fzf --height 40% --reverse | awk "{print \$1}")'
 
-alias arhp='arh publish --apply-fixes'
 alias gcc=create_commit
+alias gcm='git commit -m'
 alias gcf='gs cc -a -m'
 alias gca='gs ca -a --no-edit'
-alias gbd=clean_git_branches
-alias resync='gs rs && gs rr'
 
+alias gbd=clean_git_branches
+alias gbc='gsw $(git branch --sort=-committerdate --format="%(refname:short) - %(contents:subject)" | fzf --height 40% --reverse | awk "{print \$1}")'
+
+alias resync='gs rs && gs rr'
 alias gstash='git add -A && git commit -m "TEMPORARY STASH. DO NOT COMMIT."'
 alias gpop='check_git_pop'
+alias gbup=rebase_branch
+alias arhp='arh publish --apply-fixes'
 
 function create_commit() {
     if [ $# -eq 0 ]; then
