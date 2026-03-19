@@ -58,6 +58,7 @@ alias grc='git rebase --continue'
 alias gsw='git switch'
 alias gst='git status'
 alias gbup=rebase_branch
+alias gcb='gsw $(git branch --sort=-committerdate --format="%(refname:short) - %(contents:subject)" | fzf --height 40% --reverse | awk "{print \$1}")'
 
 alias arhp='arh publish --apply-fixes'
 alias gcc=create_commit
