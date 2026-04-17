@@ -337,12 +337,31 @@
   :config
   (setq remote-file-name-inhibit-locks t
         tramp-use-scp-direct-remote-copying t
-        remote-file-name-inhibit-auto-save-visited t)
+        remote-file-name-inhibit-auto-save-visited t
+        remote-file-name-inhibit-auto-save t)
   (setq tramp-copy-size-limit (* 1024 1024) ;; 1MB
         tramp-verbose 2)
+  ;; Use ssh controlmaster multiplexing (reuses connections).
+  (setq tramp-ssh-controlmaster-options
+        (concat "-o ControlMaster=auto "
+                "-o ControlPath=~/.ssh/cm-%%r@%%h:%%p "
+                "-o ControlPersist=10m "))
+  ;; Prefer ssh over scp for file operations — fewer connection setups.
+  (setq tramp-default-method "ssh")
+  ;; Cache remote files for 10 minutes before re-checking.
+  (setq tramp-completion-reread-directory-timeout 600)
+  ;; Don't let vc-mode check remote files on every open.
+  (setq vc-ignore-dir-regexp
+        (format "%s\\|%s"
+                vc-ignore-dir-regexp
+                tramp-file-name-regexp))
   (connection-local-set-profile-variables
    'remote-direct-async-process
    '((tramp-direct-async-process . t)))
+
+  (connection-local-set-profiles
+   '(:application tramp :protocol "ssh")
+   'remote-direct-async-process)
 
   (connection-local-set-profiles
    '(:application tramp :protocol "scp")

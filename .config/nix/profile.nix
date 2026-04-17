@@ -7,7 +7,6 @@ buildEnv {
   # to get all the symlink we need
   extraOutputsToInstall = [ "out" "man" "lib" ];
   paths = [
-    # ... put your packages here
     tmux
     ripgrep
     nix-direnv
@@ -22,11 +21,9 @@ buildEnv {
       #!${stdenv.shell}
       cd ~/.config/nix || exit 1
       nix flake update
-      # Why do i need to specify nix here??????????
       nix profile upgrade nix
     '')
 
-    # puts in your root the nixpkgs version
     (writeTextFile {
       name = "nixpkgs-version";
       destination = "/nixpkgs-version";
