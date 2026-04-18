@@ -4,7 +4,7 @@
 
 buildEnv {
   inherit name;
-  # to get all the symlink we need
+  # To get all the symlink we need
   extraOutputsToInstall = [ "out" "man" "lib" ];
   paths = [
     tmux

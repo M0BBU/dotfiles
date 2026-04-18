@@ -331,7 +331,7 @@
   (setq ledger-default-date-format ledger-iso-date-format))
 
 (use-package csv-mode
-    :ensure)
+  :ensure)
 
 (use-package tramp
   :config
@@ -369,6 +369,8 @@
 
   (setq magit-tramp-pipe-stty-settings 'pty))
 
+(use-package ox-rss
+  :ensure)
 
 ;;;###autoload
 (add-to-list 'auto-mode-alist (cons "\\.go\\'" 'go-ts-mode))
@@ -385,9 +387,9 @@
                  (let ((name (read-string "Post title: ")))
                    (setq post-title name)
                    (expand-file-name (format "%s-%s.org"
-                                            (format-time-string "%Y-%m-%d")
-                                            (replace-regexp-in-string " " "-" (downcase name)))
-                                     "~/code/cleinad.com/posts/"))))
+                                             (format-time-string "%Y-%m-%d")
+                                             (replace-regexp-in-string " " "-" (downcase name)))
+                                     "~/code/cleinad.com/drafts/"))))
          "#+TITLE: %((lambda() post-title))\n#+DATE: %t\n#+FILETAGS: :%^{Tags}:\n\n%?"
          :jump-to-captured t)))
 
@@ -401,12 +403,12 @@
   (load-file "~/code/cleinad.com/blog.el")
 
   (let* ((local-path "~/code/cleinad.com/html")
-        (server (getenv "SERVER"))
-        (port (getenv "PORT"))
-        (scp-cmd (format "scp -P %s -r %s %s:/var/www/cleinad.com/" port local-path server)))
+         (server (getenv "SERVER"))
+         (port (getenv "PORT"))
+         (scp-cmd (format "scp -P %s -r %s %s:/var/www/cleinad.com/" port local-path server)))
 
     (if (file-directory-p local-path)
-      (message "Deleting html directory...")
+        (message "Deleting html directory...")
       (delete-directory local-path t))
 
     (org-publish "cleinad.com" t)
@@ -416,6 +418,7 @@
     (if (= 0 (shell-command scp-cmd))
         (message "Update successful!")
       (error "Failed to sync!"))))
+
 
 ;; Need to tell emacs where to get the grammars
 (setq treesit-language-source-alist

@@ -4,6 +4,7 @@ cask "jimeh/emacs-builds/emacs-app"
 cask "anki"
 cask "kitty"
 cask "signal"
+cask "protonvpn"
 
 # My favorite font.
 cask "font-comic-mono"
